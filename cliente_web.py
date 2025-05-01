@@ -5,9 +5,8 @@ import calculadora_pb2_grpc
 
 app = Flask(__name__)
 
-def criar_stub():
-	canal = grpc.insecure_channel('localhost:50051')
-	return calculadora_pb2_grpc.CalculadoraStub(canal)
+SERVER_A_ADDRESS = 'localhost:50052'
+SERVER_B_ADDRESS = 'localhost:50053'
 
 @app.route('/')
 
@@ -20,12 +19,18 @@ def calcular():
 	operacao = data['operacao']
 	num1 = float(data['num1'])
 	num2 = float(data['num2'])
-	stub = criar_stub()
+
 	try:
 		if operacao == 'soma':
+			canal = grpc.insecure_channel(SERVER_A_ADDRESS)
+			stub = calculadora_pb2_grpc.CalculadoraStub(canal)
 			resposta = stub.Soma(calculadora_pb2.OperacaoRequest(numero1=num1, numero2=num2))
+
 		elif operacao == 'subtracao':
+			canal = grpc.insecure_channel(SERVER_B_ADDRESS)
+			stub = calculadora_pb2_grpc.CalculadoraStub(canal)
 			resposta = stub.Subtracao(calculadora_pb2.OperacaoRequest(numero1=num1, numero2=num2))
+
 		else:
 			return jsonify({'erro':'Operação inválida'}), 400
 
