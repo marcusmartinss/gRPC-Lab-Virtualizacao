@@ -108,7 +108,7 @@ python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. calculadora.
 python3 servidor.py
 ```
 
-**3. Para subir o Web**
+**3. Para subir o Cliente Web**
 
 ``` bash
 # Terminal 4 - Cliente Web na porta 5000
