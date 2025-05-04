@@ -1,3 +1,4 @@
+#Python
 __pycache__/*
 calculadora_pb2.py
 calculadora_pb2_grpc.py
@@ -5,3 +6,7 @@ calculadora.pb.cc
 calculadora.grpc.pb.cc
 servidor_a
 servidor_b
+
+
+# Virtual environment
+venv/
